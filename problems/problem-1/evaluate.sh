@@ -23,7 +23,9 @@ DETAILS=""
 TEST_COUNT=0
 
 for input_file in "$TESTS_DIR"/input-*.txt; do
-  test_num=$(echo "$input_file" | grep -o '[0-9]\+')
+  base="${input_file##*/}"          # input-3.txt
+  test_num="${base#input-}"         # 3.txt
+  test_num="${test_num%.txt}"       # 3
   expected_file="$TESTS_DIR/expected-$test_num.txt"
   TEST_COUNT=$((TEST_COUNT + 1))
 
