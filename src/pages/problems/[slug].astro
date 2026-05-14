@@ -1,0 +1,147 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllProblems, getProblemWithScoreboard } from '../../lib/data.ts';
+import { marked } from 'marked';
+
+export async function getStaticPaths() {
+  const problems = await getAllProblems();
+  return problems.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const data = await getProblemWithScoreboard(slug as string);
+const bodyHtml = marked.parse(data.problemBody);
+
+const medal = (rank: number) => (rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : '');
+const fmtTimestamp = (iso: string) =>
+  new Date(iso).toLocaleString('en-US', {
+    year: 'numeric', month: 'short', day: 'numeric',
+    hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'UTC',
+  }) + ' UTC';
+const pct = (s: number, t: number) => Math.max(0, Math.min(100, Math.round((s / t) * 100)));
+const barColor = (p: number) => (p >= 80 ? 'var(--accent)' : p >= 50 ? '#ffd24a' : '#ff5c5c');
+---
+<Layout title={`${data.title} — Problem Solving Gym`}>
+  <main class="wrap">
+    <a class="back" href="/">← Back to Problems</a>
+
+    <section class="problem">
+      <h1 class="title">{data.title}</h1>
+      <article class="md" set:html={bodyHtml} />
+    </section>
+
+    <hr class="divider" />
+
+    <section class="board">
+      <h2 class="board-title">LEADERBOARD</h2>
+      {data.scoreboard.length === 0 ? (
+        <p class="empty">No submissions yet. Be the first.</p>
+      ) : (
+        <table class="leaderboard">
+          <thead>
+            <tr>
+              <th class="col-rank">Rank</th>
+              <th class="col-dev">Developer</th>
+              <th class="col-score">Score</th>
+              <th class="col-time">Submitted</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.scoreboard.map((row) => {
+              const p = pct(row.score, row.total_points);
+              return (
+                <tr class={`rank-${row.rank <= 3 ? row.rank : 'n'}`}>
+                  <td class="col-rank"><span class="rank-num">{row.rank}</span> <span class="medal">{medal(row.rank)}</span></td>
+                  <td class="col-dev">{row.author}</td>
+                  <td class="col-score">
+                    <div class="score-cell">
+                      <div class="score-bar"><div class="score-fill" style={`width:${p}%; background:${barColor(p)}`}></div></div>
+                      <span class="score-text">{row.score} / {row.total_points}</span>
+                    </div>
+                  </td>
+                  <td class="col-time">{fmtTimestamp(row.submitted_at)}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
+    </section>
+  </main>
+
+  <style>
+    .wrap { max-width: 960px; margin: 0 auto; padding: 48px 24px 120px; }
+    .back {
+      display: inline-block;
+      margin-bottom: 32px;
+      color: var(--fg-dim);
+      letter-spacing: 0.08em;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+    .back:hover { color: var(--accent); text-decoration: none; }
+    .title {
+      font-family: var(--font-display);
+      color: var(--accent);
+      font-size: clamp(18px, 3vw, 28px);
+      letter-spacing: 0.04em;
+      line-height: 1.4;
+      margin: 0 0 32px;
+      text-shadow: 0 0 10px rgba(57, 255, 20, 0.25);
+    }
+    .md :global(h1) { display: none; }
+    .md :global(h2) { color: var(--fg); font-size: 18px; margin-top: 32px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .md :global(p), .md :global(li) { color: var(--fg); }
+    .md :global(ul) { padding-left: 20px; }
+    .md :global(strong) { color: var(--accent); }
+    .divider { border: 0; border-top: 1px dashed var(--border); margin: 64px 0; }
+    .board-title {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      color: var(--accent);
+      font-size: 14px;
+      margin: 0 0 24px;
+    }
+    .empty { color: var(--fg-dim); text-align: center; padding: 48px 0; border: 1px dashed var(--border); }
+    .leaderboard {
+      width: 100%;
+      border-collapse: collapse;
+      font-variant-numeric: tabular-nums;
+    }
+    .leaderboard th, .leaderboard td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .leaderboard th {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      font-weight: 700;
+    }
+    .leaderboard tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+    .leaderboard tbody tr.rank-1 {
+      background: rgba(57, 255, 20, 0.07);
+      border-left: 3px solid var(--accent);
+      box-shadow: inset 0 0 24px rgba(57, 255, 20, 0.08);
+    }
+    .leaderboard tbody tr.rank-2 { border-left: 3px solid var(--silver); }
+    .leaderboard tbody tr.rank-3 { border-left: 3px solid var(--bronze); }
+    .rank-num { font-weight: 700; }
+    .medal { margin-left: 6px; }
+    .col-rank { width: 90px; }
+    .col-dev { font-weight: 500; }
+    .col-score { width: 220px; }
+    .col-time { color: var(--fg-dim); font-size: 13px; }
+    .score-cell { position: relative; display: flex; align-items: center; gap: 12px; }
+    .score-bar { flex: 1; height: 8px; background: var(--bg-elev-2); border-radius: 2px; overflow: hidden; }
+    .score-fill { height: 100%; transition: width 240ms ease; }
+    .score-text { font-weight: 700; min-width: 80px; text-align: right; }
+    @media (max-width: 600px) {
+      .leaderboard { font-size: 13px; }
+      .col-time { display: none; }
+    }
+  </style>
+</Layout>
