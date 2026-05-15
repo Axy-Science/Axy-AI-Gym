@@ -1,46 +1,45 @@
 ---
-title: "FizzBuzz Supreme"
+title: "1 and Prime Numbers"
 slug: "problem-1"
-published_at: 2026-05-14
+published_at: 2026-05-15
 ---
 
-# FizzBuzz Supreme
+# 1 and Prime Numbers
 
-Write a program that reads integers from stdin (one per line) until EOF, and for each integer prints:
+Given a positive integer **N**, find all prime numbers less than N. Output them in ascending order, one per line.
 
-- `Fizz` if divisible by 3
-- `Buzz` if divisible by 5
-- `FizzBuzz` if divisible by both 3 and 5
-- The number itself otherwise
+## Input
 
-**Scoring:** 5 test cases, 20 points each. Total: 100 points.
+A single integer N (1 ≤ N ≤ 100,000,000) read from standard input.
 
-## Input Format
+## Output
 
-One integer per line, terminated by EOF.
-
-## Output Format
-
-One result per line, matching the rules above.
+All qualifying numbers less than N, printed one per line in ascending order. If there are no qualifying numbers, output nothing.
 
 ## Example
 
 **Input:**
 
 ```
-1
-3
-5
-15
-7
+13
 ```
 
 **Output:**
 
 ```
 1
-Fizz
-Buzz
-FizzBuzz
+2
+3
+5
 7
+11
 ```
+
+## Scoring
+
+Your solution is evaluated against 10 test cases worth 10 points each (100 total).
+
+- **Tests 1–5** — small inputs. Correctness-focused. Generous time limits.
+- **Tests 6–10** — large inputs. Efficiency-focused. Strict time limits. Solutions that are too slow will timeout and score 0 for that test case.
+
+Choose your language wisely. Optimize your algorithm. Every millisecond counts on the upper tests.

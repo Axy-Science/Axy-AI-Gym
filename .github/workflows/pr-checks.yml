@@ -1,0 +1,41 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-results:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Find modified result files
+        id: find-results
+        run: |
+          FILES=$(git diff --name-only --diff-filter=AM origin/${{ github.base_ref }}...HEAD \
+            | grep -E '^problems/problem-1/.*results\.md$' || true)
+          {
+            echo "files<<EOF"
+            echo "$FILES"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+          if [ -z "$FILES" ]; then
+            echo "No result files to validate."
+          else
+            echo "Will validate:"
+            echo "$FILES"
+          fi
+
+      - name: Validate result integrity
+        if: steps.find-results.outputs.files != ''
+        run: |
+          chmod +x tools/verify-linux-amd64
+          echo "${{ steps.find-results.outputs.files }}" | while IFS= read -r file; do
+            if [ -n "$file" ]; then
+              ./tools/verify-linux-amd64 "$file"
+            fi
+          done

@@ -32,3 +32,7 @@ Thumbs.db
 .playwright-mcp/
 task*-*.png
 *-screenshot.png
+
+# Go eval source — NEVER commit (contains HMAC secret + reference solutions)
+_eval-src/
+*.test

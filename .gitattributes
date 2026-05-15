@@ -1,0 +1,9 @@
+# Keep generated result files LF-only so the HMAC integrity verifier
+# (which scans for `\n---` as the frontmatter terminator) accepts files
+# that have round-tripped through git on a Windows checkout with
+# core.autocrlf=true.
+problems/*/submissions/*/results.md text eol=lf
+
+# Shell scripts must stay LF — running CRLF bash scripts on macOS/Linux
+# produces opaque "command not found" errors.
+*.sh text eol=lf

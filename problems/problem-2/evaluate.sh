@@ -41,6 +41,8 @@ done
 AUTHOR=$(echo "$OUTPUT_PATH" | rev | cut -d'/' -f2 | rev)
 TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
+mkdir -p "$(dirname "$OUTPUT_PATH")"
+
 cat > "$OUTPUT_PATH" << EOF
 ---
 author: "$AUTHOR"
