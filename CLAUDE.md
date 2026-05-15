@@ -98,8 +98,7 @@ cd problems/problem-1
 ```
 
 You'll get a per-test breakdown and an overall score out of 100. The eval
-runs 10 test cases — 5 correctness, 5 efficiency. Tier 2 has strict
-timeouts; brute-force algorithms will TIMEOUT on the big inputs.
+runs 10 test cases. Some test cases validate on efficiency basis. brute-force algorithms will TIMEOUT on the big inputs.
 
 ### 6. Iterate
 
@@ -163,7 +162,7 @@ do not copy its layout for new work.
   case-sensitive. Don't reintroduce a lowercase `readme.md` alongside
   `README.md`.
 - **Never commit sample/reference solutions.** Problem-1's reference
-  Python sieve and the suboptimal alice/bob solutions live in
+  Python optimal and the suboptimal alice/bob solutions live in
   `_eval-src/` (gitignored) and are used only for evaluator calibration
   and local end-to-end testing. The scoreboard ships empty so
   participants can't crib from a committed reference.
