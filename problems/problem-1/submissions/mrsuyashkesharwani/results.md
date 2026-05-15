@@ -1,35 +1,55 @@
 ---
 author: "mrsuyashkesharwani"
 total_points: 100
-score: 100
-submitted_at: "2026-05-15T11:59:56Z"
-checksum: "7ca660dff5932458c6e09ed0c86782f9257dab807858dafc5a0279e9a1ba899d"
+score: 0
+submitted_at: "2026-05-15T12:05:32Z"
+checksum: "e8ac740290a00c76fc85684681dc9dc9cae53ce44878a2e82c82c58426087d2f"
 ---
 
 # Results — mrsuyashkesharwani
 
-**Score: 100 / 100**
-**Submitted: 2026-05-15T11:59:56Z**
+**Score: 0 / 100**
+**Submitted: 2026-05-15T12:05:32Z**
 
 ## Test Case Breakdown
 
-### Test 1 (N=1) — ✅ PASS (0.180s) [+10 pts]
+### Test 1 (N=1) — ❌ FAIL (0.406s) [+0 pts]
 
-### Test 2 (N=2) — ✅ PASS (0.132s) [+10 pts]
+**Runtime error:** exit status 127: /bin/sh: python3: not found
 
-### Test 3 (N=13) — ✅ PASS (0.118s) [+10 pts]
+### Test 2 (N=2) — ❌ FAIL (0.378s) [+0 pts]
 
-### Test 4 (N=100) — ✅ PASS (0.135s) [+10 pts]
+**Runtime error:** exit status 127: /bin/sh: python3: not found
 
-### Test 5 (N=1000) — ✅ PASS (0.140s) [+10 pts]
+### Test 3 (N=13) — ❌ FAIL (0.389s) [+0 pts]
 
-### Test 6 (N=100000) — ✅ PASS (0.153s) [+10 pts]
+**Runtime error:** exit status 127: /bin/sh: python3: not found
 
-### Test 7 (N=1000000) — ✅ PASS (0.286s) [+10 pts]
+### Test 4 (N=100) — ❌ FAIL (0.433s) [+0 pts]
 
-### Test 8 (N=10000000) — ✅ PASS (1.911s) [+10 pts]
+**Runtime error:** exit status 127: /bin/sh: python3: not found
 
-### Test 9 (N=50000000) — ✅ PASS (7.582s) [+10 pts]
+### Test 5 (N=1000) — ❌ FAIL (0.454s) [+0 pts]
 
-### Test 10 (N=100000000) — ✅ PASS (14.044s) [+10 pts]
+**Runtime error:** exit status 127: /bin/sh: python3: not found
+
+### Test 6 (N=100000) — ❌ FAIL (0.397s) [+0 pts]
+
+**Runtime error:** exit status 127: /bin/sh: python3: not found
+
+### Test 7 (N=1000000) — ❌ FAIL (0.367s) [+0 pts]
+
+**Runtime error:** exit status 127: /bin/sh: python3: not found
+
+### Test 8 (N=10000000) — ❌ FAIL (0.407s) [+0 pts]
+
+**Runtime error:** exit status 127: /bin/sh: python3: not found
+
+### Test 9 (N=50000000) — ❌ FAIL (0.373s) [+0 pts]
+
+**Runtime error:** exit status 127: /bin/sh: python3: not found
+
+### Test 10 (N=100000000) — ❌ FAIL (0.427s) [+0 pts]
+
+**Runtime error:** exit status 127: /bin/sh: python3: not found
 
