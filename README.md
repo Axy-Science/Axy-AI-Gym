@@ -24,7 +24,13 @@ A competitive problem-solving repo for the dev team. Solve problems, run the eva
 
    Other languages work the same way — substitute the command (`node solution.js`, `go run solution.go`, etc.).
 7. Iterate until you're happy with your score. The eval overwrites `results.md` each run.
-8. Commit your `solution.*` and `results.md`, push, and open a PR.
+8. Commit `results.md` (required) and optionally your `solution.*`, push, and open a PR.
+
+   > **Committing your solution is optional.** The scoreboard only needs `results.md`. If you push your `solution.*`, anyone who pulls `main` or branches off it can read your approach — great for sharing, less ideal if you want to keep things competitive while the problem is still active. To keep your solution private, commit only the results file:
+   > ```
+   > git add problems/<problem-slug>/submissions/<your-handle>/results.md
+   > ```
+   > Just make sure your `solution.*` stays in your submission folder locally so the eval can re-run it.
 9. Wait for RshmanGit to merge your PR. Once done you score will be visible on the live dashbaord
 
 ## Scoreboard

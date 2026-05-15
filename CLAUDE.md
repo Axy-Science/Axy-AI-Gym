@@ -125,6 +125,19 @@ the PR if the HMAC checksum doesn't match the recorded score — i.e. don't
 hand-edit the file. Once your PR merges, the deployed site rebuilds and
 your row appears.
 
+> **Committing your solution file is optional.** The scoreboard only needs
+> `results.md` — that's what carries the HMAC-signed score the site reads.
+> Pushing your `solution.*` to `main` means anyone who pulls or branches off
+> `main` can read your approach. If you'd rather keep things competitive
+> while a problem is still active, stage only the results file:
+>
+> ```
+> git add problems/problem-1/submissions/aarsh/results.md
+> ```
+>
+> Keep your `solution.*` in the submission folder locally so the eval can
+> re-run it — `.gitignore` is not required, an unstaged file works fine.
+
 ### Scoring & tiebreakers
 
 - Ranks sort by **score descending**.
