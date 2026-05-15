@@ -39,7 +39,4 @@ All qualifying numbers less than N, printed one per line in ascending order. If 
 
 Your solution is evaluated against 10 test cases worth 10 points each (100 total).
 
-- **Tests 1–5** — small inputs. Correctness-focused. Generous time limits.
-- **Tests 6–10** — large inputs. Efficiency-focused. Strict time limits. Solutions that are too slow will timeout and score 0 for that test case.
-
-Choose your language wisely. Optimize your algorithm. Every millisecond counts on the upper tests.
+Choose your language. Optimize your algorithm. Every millisecond counts on the upper tests.
